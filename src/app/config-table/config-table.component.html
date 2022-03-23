@@ -1,0 +1,81 @@
+<mat-toolbar>
+  <button mat-icon-button color="accent" aria-label="Example icon button with a menu icon" (click)="opened=!opened">
+    <mat-icon>menu</mat-icon>
+  </button>
+</mat-toolbar>
+<mat-drawer-container class="example-container">
+  <mat-drawer mode="side" [(opened)]="opened">
+    <!-- Drawer content -->
+    <section class="example-section" *ngFor="let value of displayedColumns">
+      <mat-checkbox class="example-margin">{{ value }}</mat-checkbox>
+    </section>
+  </mat-drawer>
+  <mat-drawer-content>
+    <div class="table-shop">
+      <table mat-table [dataSource]="dataShop" class="mat-elevation-z8">
+
+          <ng-container matColumnDef="select">
+            <th mat-header-cell *matHeaderCellDef>
+              <mat-checkbox (change)="$event ? masterToggle() : null"
+                            [checked]="selection.hasValue() && isAllSelected()"
+                            [indeterminate]="selection.hasValue() && !isAllSelected()"
+                            [aria-label]="checkboxLabel()">
+              </mat-checkbox>
+            </th>
+            <td mat-cell *matCellDef="let row">
+              <mat-checkbox (click)="$event.stopPropagation()"
+                            (change)="$event ? selection.toggle(row) : null"
+                            [checked]="selection.isSelected(row)"
+                            [aria-label]="checkboxLabel(row)">
+              </mat-checkbox>
+            </td>
+          </ng-container>
+        
+          <ng-container matColumnDef="name">
+              <th mat-header-cell *matHeaderCellDef> Name </th>
+              <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+            </ng-container>
+          
+            <ng-container matColumnDef="code">
+              <th mat-header-cell *matHeaderCellDef> Code </th>
+              <td mat-cell *matCellDef="let element"> {{element.code}} </td>
+            </ng-container>
+          
+            <ng-container matColumnDef="photo">
+              <th mat-header-cell *matHeaderCellDef> Photo </th>
+              <td mat-cell *matCellDef="let element"> {{element.photo}} </td>
+            </ng-container>
+          
+            <ng-container matColumnDef="brand">
+              <th mat-header-cell *matHeaderCellDef> Brand </th>
+              <td mat-cell *matCellDef="let element"> {{element.brand}} </td>
+            </ng-container>
+          
+            <ng-container matColumnDef="price">
+                <th mat-header-cell *matHeaderCellDef> Price </th>
+                <td mat-cell *matCellDef="let element"> {{element.price}} </td>
+            </ng-container>
+          
+            <ng-container matColumnDef="crossedPrice">
+                <th mat-header-cell *matHeaderCellDef> Crossed Price </th>
+                <td mat-cell *matCellDef="let element"> {{element.crossedPrice}} </td>
+            </ng-container>
+          
+            <ng-container matColumnDef="datePublished">
+                <th mat-header-cell *matHeaderCellDef> Date Published </th>
+                <td mat-cell *matCellDef="let element"> {{element.datePublished | date}} </td>
+            </ng-container>
+          
+            <ng-container matColumnDef="isActive">
+                <th mat-header-cell *matHeaderCellDef> Active </th>
+                <td mat-cell *matCellDef="let element"> {{element.isActive}} </td>
+            </ng-container>
+        
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"
+              (click)="selection.toggle(row)">
+          </tr>
+        </table>
+  </div>
+  </mat-drawer-content>
+</mat-drawer-container>
