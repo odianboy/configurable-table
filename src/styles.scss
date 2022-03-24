@@ -16,7 +16,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 }
 
 table {
-    width: 80%;
+    width: 60%;
 }
 
 .example-container {
@@ -30,4 +30,21 @@ table {
 .example-spacer {
     flex: 1 1 auto;
     margin-bottom: 10px;
-  }
+}
+
+.valueSideNav {
+    padding: 10px 10px;
+}
+
+.colorSelectRow {
+    background-color: bisque;
+}
+
+li {
+    list-style-type: none;
+}
+
+ul {
+    margin-left: 10px; 
+    padding-left: 0;
+}
