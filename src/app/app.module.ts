@@ -17,12 +17,15 @@ import { MatIconModule } from '@angular/material/icon';
 
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { ReactiveFormsModule } from '@angular/forms';
+import { DragDropModule } from '@angular/cdk/drag-drop';
+import { ConfigSidenavComponent } from './config-sidenav/config-sidenav.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    ConfigTableComponent
+    ConfigTableComponent,
+    ConfigSidenavComponent
   ],
   imports: [
     BrowserModule,
@@ -36,7 +39,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     FormsModule,
     MatIconModule,
     MatToolbarModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    DragDropModule
   ],
   providers: [],
   bootstrap: [AppComponent]

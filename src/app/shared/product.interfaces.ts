@@ -8,9 +8,3 @@ export interface Product {
     datePublished: Date;
     isActive: boolean;
 }
-
-export interface NameColumm {
-    name: string;
-    select: boolean;
-    subNameColumn?: NameColumm[];
-}
