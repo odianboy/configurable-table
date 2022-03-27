@@ -1,12 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { SelectionModel } from '@angular/cdk/collections';
 import { SHOP_DATA } from '../shared/product-data.const';
 import { Product } from '../shared/product.interfaces';
-import { COLUMNS_DATA } from '../shared/column-data.const';
-import { Column } from '../shared/column.interfaces';
 import { ColumnService } from '../shared/column.service';
-import { filter, map, Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 
 
 @Component({
@@ -16,39 +14,36 @@ import { filter, map, Observable } from 'rxjs';
 })
 export class ConfigTableComponent {
 
-  displayedColumns!: string[];
-  columns!: Column[];
   dataShop = new MatTableDataSource<Product>(SHOP_DATA);
   selection = new SelectionModel<Product>(true, []);
 
   displayedColumns$: Observable<string[]>;
 
   constructor(private columnService: ColumnService) {
-    this.displayedColumns$ =  columnService.columns$.pipe(
+    this.displayedColumns$ =  this.columnService.columns$.pipe(
       map(value => value.filter(
         value => value.display != false
-      ).map(value => value.ref)))
-    
+      ).map(value => value.ref)));
   }
 
   isAllSelected() {
     const numSelected = this.selection.selected.length;
     const numRows = this.dataShop.data.length;
     return numSelected === numRows;
-  }
+  };
 
   masterToggle() {
     if (this.isAllSelected()) {
       this.selection.clear();
       return;
-    }
+    };
     this.selection.select(...this.dataShop.data);
-  }
+  };
 
   checkboxLabel(row?: Product): string {
     if (!row) {
       return `${this.isAllSelected() ? 'deselect' : 'select'} all`;
     }
     return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row`;
-  }
+  };
 }

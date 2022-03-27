@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { Column } from '../shared/column.interfaces';
 
-import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { ColumnService } from '../shared/column.service';
+
+import { CdkDragDrop } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-config-sidenav',
@@ -16,13 +17,14 @@ export class ConfigSidenavComponent  {
 
   constructor(private columnService: ColumnService) {
     this.columns$ = columnService.columns$;
-    
-    this.columns$.subscribe((value) => {
-      console.log(value);
-    })
-  }
+  };
 
   updateDisplay(ref: string): void {
     this.columnService.updateDisplayCheck(ref);
-  }
+  };
+
+  drop(event: CdkDragDrop<string[]>) {
+    this.columnService.dropArray(event);
+  };
+
 }
