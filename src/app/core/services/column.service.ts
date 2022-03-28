@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, map, Observable } from 'rxjs';
-import { COLUMNS_DATA } from './column-data.const';
-import { Column } from './column.interfaces';
+import { COLUMNS_DATA } from '../consts/column-data.const';
+import { Column } from '../interfaces/column.interface';
 
 import { CdkDragDrop } from '@angular/cdk/drag-drop';
 
@@ -27,13 +27,22 @@ export class ColumnService {
     this._columns$.next(columns);
   };
 
-  dropArray(event: CdkDragDrop<string[]>) {
+  changeOfPosition(event: CdkDragDrop<string[]>) {
+    let staticElement = new Map();
     const columns = this._columns$.getValue();
+    let idxStatic = columns.findIndex(item => item.static);
+
+    if (idxStatic !== -1) {
+      staticElement.set(idxStatic, columns[idxStatic]);
+      columns.splice(idxStatic, 1);
+    };
+
     let element = columns[event.previousIndex];
 
     columns.splice(event.previousIndex, 1);
     columns.splice(event.currentIndex, 0, element);
+    columns.splice(idxStatic, idxStatic, staticElement.get(idxStatic));
 
-    this._columns$.next(columns)
+    this._columns$.next(columns);
   };
 }

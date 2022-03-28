@@ -7,4 +7,4 @@ export interface Product {
     crossedPrice: number;
     datePublished: Date;
     isActive: boolean;
-}
+};

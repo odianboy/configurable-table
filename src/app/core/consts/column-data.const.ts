@@ -1,4 +1,4 @@
-import { Column } from "./column.interfaces";
+import { Column } from "../interfaces/column.interface";
 
 export const COLUMNS_DATA: Column[] = [
     {name: '', ref: 'select', display: true, static: true},

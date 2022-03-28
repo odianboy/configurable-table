@@ -4,7 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ConfigTableComponent } from './config-table/config-table.component';
+import { ConfigTableComponent } from './pages/config-table/config-table.component';
 
 import { MatTableModule } from '@angular/material/table';
 import { MatCheckboxModule } from '@angular/material/checkbox';
@@ -18,7 +18,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { ReactiveFormsModule } from '@angular/forms';
 import { DragDropModule } from '@angular/cdk/drag-drop';
-import { ConfigSidenavComponent } from './config-sidenav/config-sidenav.component';
+import { ConfigSidenavComponent } from './pages/config-sidenav/config-sidenav.component';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 
 @NgModule({
@@ -40,7 +41,8 @@ import { ConfigSidenavComponent } from './config-sidenav/config-sidenav.componen
     MatIconModule,
     MatToolbarModule,
     ReactiveFormsModule,
-    DragDropModule
+    DragDropModule,
+    MatPaginatorModule
   ],
   providers: [],
   bootstrap: [AppComponent]

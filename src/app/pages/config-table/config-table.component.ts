@@ -1,10 +1,12 @@
-import { Component } from '@angular/core';
+import {AfterViewInit, Component, ViewChild} from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { SelectionModel } from '@angular/cdk/collections';
-import { SHOP_DATA } from '../shared/product-data.const';
-import { Product } from '../shared/product.interfaces';
-import { ColumnService } from '../shared/column.service';
+import { Product } from '../../core/interfaces/product.interface';
+import { ColumnService } from '../../core/services/column.service';
 import { map, Observable } from 'rxjs';
+import { ProductDataMockService } from 'src/app/core/services/product-data-mock.service';
+
+import { MatPaginator } from '@angular/material/paginator';
 
 
 @Component({
@@ -12,14 +14,24 @@ import { map, Observable } from 'rxjs';
   templateUrl: './config-table.component.html',
   styleUrls: ['./config-table.component.scss']
 })
-export class ConfigTableComponent {
+export class ConfigTableComponent implements AfterViewInit{
 
-  dataShop = new MatTableDataSource<Product>(SHOP_DATA);
+  dataShop: MatTableDataSource<Product>;
   selection = new SelectionModel<Product>(true, []);
 
   displayedColumns$: Observable<string[]>;
 
-  constructor(private columnService: ColumnService) {
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+
+  ngAfterViewInit() {
+    this.dataShop.paginator = this.paginator;
+  }
+
+  constructor(
+    private columnService: ColumnService,
+    private mockDataServices: ProductDataMockService) {
+
+    this.dataShop = new MatTableDataSource<Product>(this.mockDataServices.generateRandomProducts());
     this.displayedColumns$ =  this.columnService.columns$.pipe(
       map(value => value.filter(
         value => value.display != false

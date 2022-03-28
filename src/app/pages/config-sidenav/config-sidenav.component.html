@@ -13,7 +13,6 @@
         <div class="example-box" cdkDrag>
             <mat-checkbox
               class="example-margin"
-              *ngIf="!column.static"
               [checked]="column.display"
               (change)="updateDisplay(column.ref)">
               {{ column.name }}

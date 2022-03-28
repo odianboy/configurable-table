@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { Column } from '../shared/column.interfaces';
+import { Column } from '../../core/interfaces/column.interface';
 
-import { Observable } from 'rxjs';
-import { ColumnService } from '../shared/column.service';
+import { map, Observable } from 'rxjs';
+import { ColumnService } from '../../core/services/column.service';
 
 import { CdkDragDrop } from '@angular/cdk/drag-drop';
 
@@ -16,7 +16,9 @@ export class ConfigSidenavComponent  {
   columns$: Observable<Column[]>;
 
   constructor(private columnService: ColumnService) {
-    this.columns$ = columnService.columns$;
+    this.columns$ = columnService.columns$.pipe(
+      map(columns => columns.filter((column) => !column.static))
+    );
   };
 
   updateDisplay(ref: string): void {
@@ -24,7 +26,6 @@ export class ConfigSidenavComponent  {
   };
 
   drop(event: CdkDragDrop<string[]>) {
-    this.columnService.dropArray(event);
+    this.columnService.changeOfPosition(event);
   };
-
 }
