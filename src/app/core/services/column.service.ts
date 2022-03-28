@@ -12,9 +12,7 @@ export class ColumnService {
 
   columns$: Observable<Column[]>;
   private _columns$: BehaviorSubject<Column[]>;
-
-  columnsData: Column[] = [];
-
+  
   constructor() { 
     this._columns$ = new BehaviorSubject(COLUMNS_DATA);
     this.columns$ = this._columns$.asObservable();

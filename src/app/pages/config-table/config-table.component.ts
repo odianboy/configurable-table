@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { SelectionModel } from '@angular/cdk/collections';
 import { Product } from '../../core/interfaces/product.interface';
@@ -7,6 +7,9 @@ import { map, Observable } from 'rxjs';
 import { ProductDataMockService } from 'src/app/core/services/product-data-mock.service';
 
 import { MatPaginator } from '@angular/material/paginator';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { switchMap } from 'rxjs/operators';
+import { ProductService } from 'src/app/core/services/product.service';
 
 
 @Component({
@@ -14,11 +17,12 @@ import { MatPaginator } from '@angular/material/paginator';
   templateUrl: './config-table.component.html',
   styleUrls: ['./config-table.component.scss']
 })
-export class ConfigTableComponent implements AfterViewInit{
+export class ConfigTableComponent implements AfterViewInit {
 
-  dataShop: MatTableDataSource<Product>;
+  dataShop!: MatTableDataSource<Product>;
   selection = new SelectionModel<Product>(true, []);
 
+  products$: Observable<Product[]>;
   displayedColumns$: Observable<string[]>;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -29,13 +33,22 @@ export class ConfigTableComponent implements AfterViewInit{
 
   constructor(
     private columnService: ColumnService,
-    private mockDataServices: ProductDataMockService) {
+    private productService: ProductService,
+    private router: Router) {
 
-    this.dataShop = new MatTableDataSource<Product>(this.mockDataServices.generateRandomProducts());
+    
+    
     this.displayedColumns$ =  this.columnService.columns$.pipe(
       map(value => value.filter(
         value => value.display != false
       ).map(value => value.ref)));
+
+    this.products$ = this.productService.products$;
+
+
+    this.products$.subscribe( (value) => {
+      this.dataShop = new MatTableDataSource<Product>(value);
+    });
   }
 
   isAllSelected() {
@@ -57,5 +70,11 @@ export class ConfigTableComponent implements AfterViewInit{
       return `${this.isAllSelected() ? 'deselect' : 'select'} all`;
     }
     return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row`;
+  };
+
+  goToProduct(row: Product) {
+    const productCode = row ? row.code: null;
+
+    this.router.navigate(['product/', productCode]);
   };
 }

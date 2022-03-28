@@ -1,4 +1,4 @@
-<div class="table-shop">
+<div class="table-shop" >
   <table mat-table [dataSource]="dataShop" class="mat-elevation-z8">
 
     <ng-container matColumnDef="select">
@@ -67,7 +67,7 @@
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns$ | async"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns$ | async;"
-        (click)="selection.toggle(row)"
+        (click)="goToProduct(row)"
         [ngClass]="{colorSelectRow: selection.isSelected(row)}">
     </tr>
 
@@ -76,4 +76,7 @@
   showFirstLastButtons 
   aria-label="Select page of periodic elements" class="table-pagination">
   </mat-paginator>
+
+  <!-- (click)="selection.toggle(row)" -->
+  <!-- <a [routerLink]="['/product']" >Перейти</a> -->
 </div>
