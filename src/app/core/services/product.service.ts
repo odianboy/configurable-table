@@ -24,10 +24,9 @@ getProductByCode(code: number): any {
 updateProduct(product: Product) {
   const products = this._products$.getValue();
 
-  let idx = products.findIndex(item => item.code === product.code)
-  products.splice(idx, idx, product)
-
-  console.log(products[idx]);
+  let idx = products.findIndex(item => item.code === product.code);
+  
+  products.splice(idx, 1, product);
 
   this._products$.next(products);
 }

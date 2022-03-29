@@ -6,7 +6,7 @@ import { ProductItemComponent } from './pages/product-item/product-item.componen
 
 const routes: Routes = [
   { path: '', component: ConfigSidenavComponent },
-  { path: 'product/:code', component: ProductItemComponent, resolve: {
+  { path: ':code', component: ProductItemComponent, resolve: {
     product: ProductResolver
   }},
   { path: '**', component:  ConfigSidenavComponent}

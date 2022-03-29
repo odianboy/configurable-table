@@ -73,6 +73,6 @@ export class ConfigTableComponent implements AfterViewInit {
   goToProduct(row: Product) {
     const productCode = row ? row.code: null;
 
-    this.router.navigate(['product/', productCode]);
+    this.router.navigate(['/', productCode]);
   };
 }

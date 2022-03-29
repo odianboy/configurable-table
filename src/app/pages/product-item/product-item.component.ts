@@ -23,8 +23,6 @@ export class ProductItemComponent {
     private router: Router
   ) {
 
-   
-
     this.product$ = this.activetedRoute.data.pipe(
       map(data => data['product'])
     );
@@ -45,11 +43,14 @@ export class ProductItemComponent {
 
   formGroupInit(): FormGroup {
     return new FormGroup({
-      productName: new FormControl(this.product.name, Validators.required),
-      productCode: new FormControl({value: this.product.code, disabled: true}),
-      productPrice: new FormControl(this.product.price, Validators.required),
-      productCrossedPrice: new FormControl(this.product.crossedPrice, Validators.required),
-      productIsActive: new FormControl(this.product.isActive, Validators.required)
+      name: new FormControl(this.product.name, Validators.required),
+      code: new FormControl({value: this.product.code, disabled: true}),
+      photo: new FormControl({value: this.product.photo, disabled: true}),
+      brand: new FormControl({value: this.product.brand, disabled: true}),
+      price: new FormControl(this.product.price, Validators.required),
+      crossedPrice: new FormControl(this.product.crossedPrice, Validators.required),
+      isActive: new FormControl(this.product.isActive, Validators.required),
+      datePublished: new FormControl({value: (this.product.datePublished), disabled: true})
     })
   }
 
@@ -58,26 +59,10 @@ export class ProductItemComponent {
       return
     }
 
-    const productData: Product = {
-      name: this.form.value.productName,
-      code: this.form.value.productCode,
-      photo: this.product.photo,
-      brand: this.product.brand,
-      price: this.form.value.productPrice,
-      crossedPrice: this.form.value.productCrossedPrice,
-      isActive: this.form.value.productIsActive,
-      datePublished: this.product.datePublished
-    }
-
-    // const {name, code, photo, brand, price, crossedPrice, isActive,datePublished} = this.form.getRawValue()
-
-    // console.log(this.form.getRawValue());
-    
-
+    const productData: Product = this.form.getRawValue();
     this.productService.updateProduct(productData);
 
     this.goToTable();
-    
   }
 
   goToTable() {

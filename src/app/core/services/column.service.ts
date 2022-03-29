@@ -39,7 +39,7 @@ export class ColumnService {
 
     columns.splice(event.previousIndex, 1);
     columns.splice(event.currentIndex, 0, element);
-    columns.splice(idxStatic, idxStatic, staticElement.get(idxStatic));
+    columns.splice(idxStatic, 0, staticElement.get(idxStatic));
 
     this._columns$.next(columns);
   };
