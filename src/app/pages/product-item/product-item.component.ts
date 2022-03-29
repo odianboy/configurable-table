@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { map, Observable, take, tap } from 'rxjs';
+import { map, take, tap } from 'rxjs';
 import { Product } from 'src/app/core/interfaces/product.interface';
 import { ProductService } from 'src/app/core/services/product.service';
 
@@ -12,8 +12,9 @@ import { ProductService } from 'src/app/core/services/product.service';
 })
 export class ProductItemComponent {
 
-  product$: Observable<Product>;
   product!: Product;
+
+  saveBtn: Boolean;
 
   form: FormGroup;
 
@@ -22,23 +23,21 @@ export class ProductItemComponent {
     private activetedRoute: ActivatedRoute,
     private router: Router
   ) {
+    this.saveBtn = false;
+    
+    this.activetedRoute.data.pipe(
+      map((data) => {
+      this.product = data['product']}),
+      take(1)
+    ).subscribe();
 
-    this.product$ = this.activetedRoute.data.pipe(
-      map(data => data['product'])
-    );
+    this.form = this.formGroupInit();
 
-    // activetedRoute.data.pipe(
+    // this.activetedRoute.data.pipe(
     //   map(data => data['product']),
     //   tap(data => this.form.patchValue(data)),
     //   take(1)
     // ).subscribe()
-    
-    this.product$.subscribe((value) => {
-      this.product = value
-    })
-
-    this.form = this.formGroupInit();
-
   };
 
   formGroupInit(): FormGroup {
@@ -58,6 +57,7 @@ export class ProductItemComponent {
     if (this.form.invalid) {
       return
     }
+    this.saveBtn = !this.saveBtn;
 
     const productData: Product = this.form.getRawValue();
     this.productService.updateProduct(productData);

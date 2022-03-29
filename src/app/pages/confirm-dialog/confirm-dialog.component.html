@@ -1,0 +1,8 @@
+<h1 mat-dialog-title>Вы точно хотите перейти?</h1>
+<mat-dialog-content>
+    <p>Пожалуйста сохраните изменения!</p>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Остаться</button>
+    <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Перейти</button>
+</mat-dialog-actions>

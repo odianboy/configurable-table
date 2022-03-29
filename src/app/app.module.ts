@@ -23,6 +23,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatDialogModule } from '@angular/material/dialog';
 
 import { NgxMaskModule, IConfig } from 'ngx-mask';
+import { ConfirmDialogComponent } from './pages/confirm-dialog/confirm-dialog.component';
 
 const maskConfig: Partial<IConfig> = {
   validation: false,
@@ -35,7 +36,8 @@ const maskConfig: Partial<IConfig> = {
     AppComponent,
     ConfigTableComponent,
     ConfigSidenavComponent,
-    ProductItemComponent
+    ProductItemComponent,
+    ConfirmDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -53,6 +55,7 @@ const maskConfig: Partial<IConfig> = {
     DragDropModule,
     MatPaginatorModule,
     MatInputModule,
+    MatDialogModule,
     NgxMaskModule.forRoot(maskConfig),
   ],
   providers: [],
