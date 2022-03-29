@@ -36,8 +36,6 @@ export class ConfigTableComponent implements AfterViewInit {
     private productService: ProductService,
     private router: Router) {
 
-    
-    
     this.displayedColumns$ =  this.columnService.columns$.pipe(
       map(value => value.filter(
         value => value.display != false

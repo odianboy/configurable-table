@@ -8,7 +8,8 @@ const routes: Routes = [
   { path: '', component: ConfigSidenavComponent },
   { path: 'product/:code', component: ProductItemComponent, resolve: {
     product: ProductResolver
-  }}
+  }},
+  { path: '**', component:  ConfigSidenavComponent}
 ];
 
 @NgModule({

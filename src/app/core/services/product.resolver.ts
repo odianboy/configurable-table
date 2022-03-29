@@ -18,7 +18,7 @@ export class ProductResolver implements Resolve<Product> {
     private router: Router
   ) {}
 
-  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> {
+  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Product> {
 
     return this.productService.getProductByCode(Number(route.params['code']));
   }

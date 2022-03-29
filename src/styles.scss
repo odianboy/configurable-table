@@ -111,3 +111,19 @@ ul {
     align-items: center;
     margin-top: 50px;
   }
+
+  .product-form {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+  }
+
+  .example-full-width {
+    width: 100%;
+  }
+
+  .btn {
+    width: 150px;
+    margin: auto;
+    cursor: pointer;
+  }
