@@ -20,6 +20,6 @@ export class ProductResolver implements Resolve<Product> {
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Product> {
 
-    return this.productService.getProductByCode(Number(route.params['code']));
+    return this.productService.getProductByCode(+route.params['code']);
   }
 }

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, of } from 'rxjs';
 import { Product } from '../interfaces/product.interface';
 import { ProductDataMockService } from './product-data-mock.service';
 
@@ -16,16 +16,16 @@ constructor(private mockDataServices: ProductDataMockService) {
   this.products$ = this._products$.asObservable();
 };
 
-getProductByCode(code: number): any {
+getProductByCode(code: number): Observable<Product> {
   const products = this._products$.getValue();
-  return products.find(item => item.code === code);
+  return of(products.find(item => item.code === code) as Product);
 }
 
 updateProduct(product: Product) {
   const products = this._products$.getValue();
 
   let idx = products.findIndex(item => item.code === product.code);
-  
+
   products.splice(idx, 1, product);
 
   this._products$.next(products);

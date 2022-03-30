@@ -2,37 +2,37 @@
 
   <form class="product-form" [formGroup]="form" (ngSubmit)="submit()">
 
-    <mat-form-field class="example-full-width" appearance="fill">
+    <mat-form-field class="example-full-width">
       <mat-label>Name</mat-label>
-      <input matInput placeholder={{product.name}} formControlName="name">
+      <input matInput [placeholder]="form.controls['name'].value" formControlName="name">
     </mat-form-field>
 
-    <mat-form-field class="example-full-width" appearance="fill">
+    <mat-form-field class="example-full-width">
       <mat-label>Code</mat-label>
       <input matInput formControlName="code">
     </mat-form-field>
 
-    <mat-form-field class="example-full-width" appearance="fill">
+    <mat-form-field class="example-full-width">
       <mat-label>Photo</mat-label>
       <input matInput formControlName="photo">
     </mat-form-field>
 
-    <mat-form-field class="example-full-width" appearance="fill">
+    <mat-form-field class="example-full-width">
       <mat-label>Brand</mat-label>
       <input matInput formControlName="brand">
     </mat-form-field>
 
-    <mat-form-field class="example-full-width" appearance="fill">
+    <mat-form-field class="example-full-width">
       <mat-label>Price</mat-label>
-      <input matInput placeholder={{product.price}} formControlName="price" mask="0000">
+      <input matInput [placeholder]="$any(form.controls['price'])" formControlName="price" mask="0000">
     </mat-form-field>
 
-    <mat-form-field class="example-full-width" appearance="fill">
+    <mat-form-field class="example-full-width">
       <mat-label>Cross Price</mat-label>
-      <input matInput placeholder={{product.crossedPrice}} formControlName="crossedPrice" mask="0000">
+      <input matInput [placeholder]="form.controls['crossedPrice'].value" formControlName="crossedPrice" mask="0000">
     </mat-form-field>
 
-    <mat-form-field class="example-full-width" appearance="fill">
+    <mat-form-field class="example-full-width">
       <mat-label>Date Published</mat-label>
       <input matInput formControlName="datePublished">
     </mat-form-field>

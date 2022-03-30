@@ -15,7 +15,7 @@ const routes: Routes = [
     canActivate: [DataRouteGuard],
     canDeactivate: [ExitDataRouteGuard]
   },
-  { path: '**', component:  ConfigSidenavComponent}
+  { path: '**', component:  ConfigSidenavComponent }
 ];
 
 @NgModule({

@@ -18,10 +18,10 @@ export class ExitDataRouteGuard implements CanDeactivate<ProductItemComponent> {
     currentState: RouterStateSnapshot,
     nextState?: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 
-      if (!component.saveBtn) {
-        const dialogRef = this.dialog.open(ConfirmDialogComponent);
-        return dialogRef.afterClosed()
-      }
+    if (component.form.dirty) {
+      const dialogRef = this.dialog.open(ConfirmDialogComponent);
+      return dialogRef.afterClosed();
+    };
       
     return true;
   }
